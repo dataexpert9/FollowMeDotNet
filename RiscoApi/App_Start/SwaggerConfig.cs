@@ -114,7 +114,7 @@ namespace WebApplication1
                         // hold additional metadata for an API. Version and title are required but you can also provide
                         // additional fields by chaining methods off SingleApiVersion.
                         //
-                        c.SingleApiVersion("BetaV1", "Risco App");
+                        c.SingleApiVersion("BetaV1", "Follow Me App");
 
                         //Adding Token Filter
                         c.OperationFilter<AddAuthTokenHeaderParameter>();
