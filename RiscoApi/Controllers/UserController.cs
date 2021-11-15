@@ -1371,7 +1371,7 @@ namespace BasketApi.Controllers
 							Port = 587,
 							EnableSsl = true,
 							DeliveryMethod = SmtpDeliveryMethod.Network,
-							UseDefaultCredentials = false,
+							UseDefaultCredentials = true,
 							Credentials = new NetworkCredential(EmailUtil.FromMailAddress.Address, EmailUtil.FromPassword)
 						};
 
