@@ -353,3 +353,4 @@ E:\GitHub\BackendRaza\FollowMeDotNet\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.
 E:\GitHub\BackendRaza\FollowMeDotNet\DAL\obj\Debug\DAL.csproj.CopyComplete
 E:\GitHub\BackendRaza\FollowMeDotNet\DAL\obj\Debug\DAL.dll
 E:\GitHub\BackendRaza\FollowMeDotNet\DAL\obj\Debug\DAL.pdb
+E:\GitHub\BackendRaza\FollowMeDotNet\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache

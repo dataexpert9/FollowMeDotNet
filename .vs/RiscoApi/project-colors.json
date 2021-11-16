@@ -5,7 +5,12 @@
       "ProjectGuid": "6003cfa9-e9b8-4e83-a54c-8256cb47c333",
       "DisplayName": "RiscoApi",
       "ColorIndex": 0
+    },
+    "08eb1ff4-dac9-470b-8ba5-fc802b9a147c": {
+      "ProjectGuid": "08eb1ff4-dac9-470b-8ba5-fc802b9a147c",
+      "DisplayName": "DAL",
+      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 2
 }
