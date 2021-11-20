@@ -28,6 +28,8 @@ using WebApplication1.BindingModels;
 
 namespace BasketApi.Controllers
 {
+
+
 	//[EnableCors(origins: "*", headers: "*", methods: "*")]
 	[RoutePrefix("api/User")]
 	public class UserController : ApiController
