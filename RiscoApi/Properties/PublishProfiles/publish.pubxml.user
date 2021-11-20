@@ -7,7 +7,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <_PublishTargetUrl>E:\RiscoDeployment</_PublishTargetUrl>
-    <History>True|2021-11-16T09:50:39.2051266Z;True|2021-11-16T13:15:55.6301352+04:00;True|2021-11-15T10:32:48.3506873+04:00;True|2021-11-15T10:11:22.1248816+04:00;True|2021-11-15T10:11:12.9497136+04:00;True|2021-11-15T10:07:28.2671916+04:00;True|2021-11-14T16:40:37.6896011+04:00;True|2021-11-14T10:35:27.6306155+04:00;True|2021-11-14T10:20:27.4316273+04:00;False|2021-11-14T10:18:25.7863696+04:00;False|2021-11-14T10:16:22.6840506+04:00;False|2021-11-14T10:15:53.6375148+04:00;</History>
+    <History>True|2021-11-20T06:52:49.7234964Z;True|2021-11-18T16:03:18.5192787+04:00;False|2021-11-18T16:03:09.4605568+04:00;True|2021-11-18T16:00:40.3510285+04:00;True|2021-11-16T13:50:39.2051266+04:00;True|2021-11-16T13:15:55.6301352+04:00;True|2021-11-15T10:32:48.3506873+04:00;True|2021-11-15T10:11:22.1248816+04:00;True|2021-11-15T10:11:12.9497136+04:00;True|2021-11-15T10:07:28.2671916+04:00;True|2021-11-14T16:40:37.6896011+04:00;True|2021-11-14T10:35:27.6306155+04:00;True|2021-11-14T10:20:27.4316273+04:00;False|2021-11-14T10:18:25.7863696+04:00;False|2021-11-14T10:16:22.6840506+04:00;False|2021-11-14T10:15:53.6375148+04:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="appsettings.json">
@@ -323,10 +323,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/14/2021 10:08:44</publishTime>
     </File>
     <File Include="bin/WebApplication1.dll">
-      <publishTime>11/16/2021 13:47:57</publishTime>
+      <publishTime>11/18/2021 10:17:40</publishTime>
     </File>
     <File Include="bin/WebApplication1.pdb">
-      <publishTime>11/16/2021 13:47:57</publishTime>
+      <publishTime>11/18/2021 10:17:40</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>11/14/2021 10:08:44</publishTime>
