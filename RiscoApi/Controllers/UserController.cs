@@ -1378,7 +1378,7 @@ namespace BasketApi.Controllers
 						var message = new MailMessage(EmailUtil.FromMailAddress, new MailAddress(Email))
 						{
 							Subject = subject,
-							Body = body + " " + codeInt
+							Body = body + " " + codeInt + " </br> Use following url to reset password " + ConfigurationManager.AppSettings["WebsiteBaseUrl"] + "auth/Resetpassword"
 						};
 
 						smtp.Send(message);
