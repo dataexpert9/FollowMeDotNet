@@ -235,14 +235,6 @@ namespace BasketApi.Areas.SubAdmin.Controllers
 
                     var HidePostsIds = ctx.HidePosts.Where(x => x.FirstUser_Id == userId && x.IsDeleted == false).Select(x => x.Post_Id).ToList();
 
-                    //posts = ctx.Posts
-                    //    .Include(x => x.User)
-                    //    .Include(x => x.Medias)
-                    //    .Where(x => x.IsDeleted == false && x.User_Id != userId && !HideAllUsersIds.Contains(x.User_Id) && !HidePostsIds.Contains(x.Id))
-                    //    .OrderByDescending(x=> x.Id)
-                    //    .ToList();
-
-
                     posts = ctx.Posts
                        .Include(x => x.User)
                        .Include(x => x.Medias)
@@ -261,7 +253,16 @@ namespace BasketApi.Areas.SubAdmin.Controllers
                         post.CommentsCount = ctx.Posts.Sum(p => p.Comments.Where(x => x.Post_Id == post.Id && x.IsDeleted == false).Count());
                         post.ShareCount = ctx.Posts.Sum(p => p.Shares.Where(x => x.Post_Id == post.Id && x.IsDeleted == false).Count());
                         post.IsUserFollow = ctx.FollowFollowers.Any(x => x.FirstUser_Id == userId && x.SecondUser_Id == post.User_Id && x.IsDeleted == false);
+
+
+                        post.Comments = ctx.Comments.Include(x=>x.User).Where(x => x.Post_Id == post.Id && x.ParentComment_Id==0).OrderByDescending(x=>x.Id).Skip(0).Take(5).ToList();
+
+
                     }
+
+                    
+
+
 
                     CustomResponse<PostListViewModel> response = new CustomResponse<PostListViewModel>
                     {
