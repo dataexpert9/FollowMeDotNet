@@ -48,5 +48,8 @@ namespace DAL
 
         [NotMapped]
         public bool IsLiked { get; set; }
+
+        [NotMapped]
+        public int LikesCount { get; set; }
     }
 }
