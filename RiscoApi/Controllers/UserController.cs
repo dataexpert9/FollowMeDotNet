@@ -28,6 +28,7 @@ using WebApplication1.BindingModels;
 
 namespace BasketApi.Controllers
 {
+
 	//[EnableCors(origins: "*", headers: "*", methods: "*")]
 	[RoutePrefix("api/User")]
 	public class UserController : ApiController
@@ -1371,14 +1372,14 @@ namespace BasketApi.Controllers
 							Port = 587,
 							EnableSsl = true,
 							DeliveryMethod = SmtpDeliveryMethod.Network,
-							UseDefaultCredentials = false,
+							UseDefaultCredentials = true,
 							Credentials = new NetworkCredential(EmailUtil.FromMailAddress.Address, EmailUtil.FromPassword)
 						};
 
 						var message = new MailMessage(EmailUtil.FromMailAddress, new MailAddress(Email))
 						{
 							Subject = subject,
-							Body = body + " " + codeInt
+							Body = body + " " + codeInt + " </br> Use following url to reset password " + ConfigurationManager.AppSettings["WebsiteBaseUrl"] + "auth/Resetpassword"
 						};
 
 						smtp.Send(message);

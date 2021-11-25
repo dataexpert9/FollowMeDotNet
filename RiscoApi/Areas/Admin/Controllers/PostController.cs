@@ -235,14 +235,6 @@ namespace BasketApi.Areas.SubAdmin.Controllers
 
                     var HidePostsIds = ctx.HidePosts.Where(x => x.FirstUser_Id == userId && x.IsDeleted == false).Select(x => x.Post_Id).ToList();
 
-                    //posts = ctx.Posts
-                    //    .Include(x => x.User)
-                    //    .Include(x => x.Medias)
-                    //    .Where(x => x.IsDeleted == false && x.User_Id != userId && !HideAllUsersIds.Contains(x.User_Id) && !HidePostsIds.Contains(x.Id))
-                    //    .OrderByDescending(x=> x.Id)
-                    //    .ToList();
-
-
                     posts = ctx.Posts
                        .Include(x => x.User)
                        .Include(x => x.Medias)
@@ -261,7 +253,16 @@ namespace BasketApi.Areas.SubAdmin.Controllers
                         post.CommentsCount = ctx.Posts.Sum(p => p.Comments.Where(x => x.Post_Id == post.Id && x.IsDeleted == false).Count());
                         post.ShareCount = ctx.Posts.Sum(p => p.Shares.Where(x => x.Post_Id == post.Id && x.IsDeleted == false).Count());
                         post.IsUserFollow = ctx.FollowFollowers.Any(x => x.FirstUser_Id == userId && x.SecondUser_Id == post.User_Id && x.IsDeleted == false);
+
+
+                        post.Comments = ctx.Comments.Include(x=>x.User).Where(x => x.Post_Id == post.Id && x.ParentComment_Id==0).OrderByDescending(x=>x.Id).Skip(0).Take(5).ToList();
+
+
                     }
+
+                    
+
+
 
                     CustomResponse<PostListViewModel> response = new CustomResponse<PostListViewModel>
                     {
@@ -308,7 +309,12 @@ namespace BasketApi.Areas.SubAdmin.Controllers
                         post.CommentsCount = ctx.Posts.Sum(p => p.Comments.Where(x => x.Post_Id == post.Id && x.IsDeleted == false).Count());
                         post.ShareCount = ctx.Posts.Sum(p => p.Shares.Where(x => x.Post_Id == post.Id && x.IsDeleted == false).Count());
                         post.IsUserFollow = true;
+
+                        post.Comments = ctx.Comments
+                                                   .Include(x => x.User)
+                                                   .Where(x => x.Post_Id == post.Id  && x.IsDeleted == false).OrderByDescending(x => x.Id).Skip(0).Take(4).ToList();
                     }
+
 
                     CustomResponse<PostListViewModel> response = new CustomResponse<PostListViewModel>
                     {
@@ -328,6 +334,51 @@ namespace BasketApi.Areas.SubAdmin.Controllers
                 return StatusCode(Utility.LogError(ex));
             }
         }
+
+
+        [HttpGet]
+        [Route("GetCommentsByPostId")]
+        public async Task<IHttpActionResult> GetCommentsByPostId(int Post_Id,int User_Id, int PageSize = int.MaxValue, int PageNo = 0)
+        {
+            try
+            {
+                using (RiscoContext ctx = new RiscoContext())
+                {
+                    List<Comment> comments = new List<Comment>();
+                    comments = ctx.Comments
+                        .Include(x => x.User)
+                        .Where(x => x.Post_Id == Post_Id && x.IsDeleted == false).OrderByDescending(x => x.Id)
+                        .ToList();
+
+                    int CommentsCount = comments.Count();
+                    comments = comments.Skip(PageNo * PageSize).Take(PageSize).ToList();
+
+                    foreach (Comment comment in comments)
+                    {
+                        comment.IsLiked = ctx.Likes.Any(x => x.Post_Id == comment.Post_Id && x.User_Id == User_Id && x.IsDeleted == false);
+                        comment.LikesCount = ctx.Comments.Sum(p => p.Likes.Where(x => x.Post_Id == comment.Post_Id && x.IsDeleted == false).Count());
+                    }
+
+
+                    CustomResponse<CommentsListViewModel> response = new CustomResponse<CommentsListViewModel>
+                    {
+                        Message = Global.ResponseMessages.Success,
+                        StatusCode = (int)HttpStatusCode.OK,
+                        Result = new CommentsListViewModel
+                        {
+                            Comments = comments,
+                            CommentsCount = CommentsCount
+                        }
+                    };
+                    return Ok(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(Utility.LogError(ex));
+            }
+        }
+
 
         [HttpGet]
         [Route("GetPostByPostId")]
