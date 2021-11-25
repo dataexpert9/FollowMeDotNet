@@ -2254,7 +2254,7 @@ StackTrace   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectio
 
 Inner Exception : The system cannot find the path specified
 ------******------
-DateTime : 11/21/2021 11:15:23 AM
+DateTime : 11/25/2021 10:29:13 AM
 
 
 MessageA network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
@@ -2301,11 +2301,11 @@ StackTrace   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectio
    at System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
    at System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
    at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
-   at BasketApi.BasketSettings.LoadSettings() in E:\GitHub\BackendRaza\FollowMeDotNet\RiscoApi\Utility\BasketSettings.cs:line 20
+   at BasketApi.BasketSettings.LoadSettings() in C:\Users\lijia\Downloads\FollowMeDotNet-main\FollowMeDotNet-main\RiscoApi\Utility\BasketSettings.cs:line 20
 
 Inner Exception : The network path was not found
 ------******------
-DateTime : 11/21/2021 11:18:12 AM
+DateTime : 11/25/2021 11:19:59 AM
 
 
 MessageA network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
@@ -2352,21 +2352,16 @@ StackTrace   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectio
    at System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
    at System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
    at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
-   at BasketApi.BasketSettings.LoadSettings() in E:\GitHub\BackendRaza\FollowMeDotNet\RiscoApi\Utility\BasketSettings.cs:line 20
+   at BasketApi.BasketSettings.LoadSettings() in C:\Users\lijia\Downloads\FollowMeDotNet-main\FollowMeDotNet-main\RiscoApi\Utility\BasketSettings.cs:line 20
 
 Inner Exception : The network path was not found
 ------******------
-DateTime : 11/22/2021 10:21:26 AM
+DateTime : 11/25/2021 11:22:08 AM
 
 
 MessageA network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
 
-StackTrace   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
-   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
-   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
-   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
-   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
-   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+StackTrace   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
    at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
    at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
@@ -2400,10 +2395,11 @@ StackTrace   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectio
    at System.Data.Entity.Internal.LazyInternalContext.InitializeDatabase()
    at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
    at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
-   at System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
-   at System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
-   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
-   at BasketApi.BasketSettings.LoadSettings() in E:\GitHub\BackendRaza\FollowMeDotNet\RiscoApi\Utility\BasketSettings.cs:line 20
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Include(String path)
+   at System.Data.Entity.Infrastructure.DbQuery`1.Include(String path)
+   at System.Data.Entity.QueryableExtensions.Include[T](IQueryable`1 source, String path)
+   at System.Data.Entity.QueryableExtensions.Include[T,TProperty](IQueryable`1 source, Expression`1 path)
+   at BasketApi.Controllers.UserController.<Login>d__2.MoveNext() in C:\Users\lijia\Downloads\FollowMeDotNet-main\FollowMeDotNet-main\RiscoApi\Controllers\UserController.cs:line 74
 
 Inner Exception : The network path was not found
 ------******------
