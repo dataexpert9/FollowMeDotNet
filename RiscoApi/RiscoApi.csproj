@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WebApplication1</RootNamespace>
     <AssemblyName>WebApplication1</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -314,7 +314,6 @@
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CommonController.cs" />
-    <Compile Include="Areas\Admin\Controllers\FriendController.cs" />
     <Compile Include="Areas\Admin\Controllers\PackageController.cs" />
     <Compile Include="Areas\Admin\Controllers\FollowFollower.cs" />
     <Compile Include="Areas\Admin\Controllers\PostController.cs" />
@@ -322,6 +321,7 @@
     <Compile Include="Areas\Admin\Controllers\StoresController.cs" />
     <Compile Include="Areas\Admin\Models\BindingModel.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Models\FriendBindingModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\PostListViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ProductCountViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ProductsViewModel.cs" />
@@ -378,6 +378,7 @@
     <Compile Include="Controllers\AddUserAddressBindingModel.cs" />
     <Compile Include="Controllers\DealsController.cs" />
     <Compile Include="Controllers\DelivererController.cs" />
+    <Compile Include="Controllers\FriendController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\RatingsController.cs" />
