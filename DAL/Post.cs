@@ -21,6 +21,7 @@ namespace DAL
             TurnOffNotifications = new HashSet<TurnOffNotification>();
             ReportPosts = new HashSet<ReportPost>();
             FriendTagInPost = new HashSet<FriendTagInPost>();
+            FeelingActivity = new HashSet<FeelingActivities>();
         }
 
         public int Id { get; set; }
@@ -79,6 +80,9 @@ namespace DAL
         [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FriendTagInPost> FriendTagInPost { get; set; }
+
+        public virtual ICollection<FeelingActivities> FeelingActivity { get; set; }
+        public virtual ICollection<CheckIn> CheckIn { get; set; }
 
 
         [NotMapped]

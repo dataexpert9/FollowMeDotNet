@@ -39,6 +39,8 @@ namespace DAL
             ReportPosts = new HashSet<ReportPost>();
             FirstUserTopFollowerLog = new HashSet<TopFollowerLog>();
             SecondUserTopFollowerLog = new HashSet<TopFollowerLog>();
+            Requester = new HashSet<Friends>();
+            Addressee = new HashSet<Friends>();
         }
 
         public int Id { get; set; }
@@ -74,6 +76,9 @@ namespace DAL
         public string UserName { get; set; }
 
         public short? Status { get; set; }
+
+        public int AccountVisibility { get; set; }
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaymentCard> PaymentCards { get; set; }
@@ -180,6 +185,8 @@ namespace DAL
 
         public virtual ICollection<ResetPasswordCode> ResetPasswordCode { get; set; }
         public virtual ICollection<FriendTagInPost> FriendTagInPost { get; set; }
+        public virtual ICollection<Friends> Requester { get; set; }
+        public virtual ICollection<Friends> Addressee { get; set; }
 
 
         public bool IsNotificationsOn { get; set; }

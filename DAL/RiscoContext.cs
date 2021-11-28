@@ -52,10 +52,40 @@ namespace DAL
         public virtual DbSet<ReportPost> ReportPosts { get; set; }
         public virtual DbSet<TopFollowerLog> TopFollowerLogs { get; set; }
         public virtual DbSet<ResetPasswordCode> ResetPasswordCode  { get; set; }
+        public virtual DbSet<FeelingActivities> FeelingActivity { get; set; }
+        public virtual DbSet<CheckIn> CheckIn { get; set; }
+        public virtual DbSet<Friends> Friends { get; set; }
 
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<User>()
+              .HasMany(x => x.Requester)
+              .WithRequired(x => x.Requester)
+              .HasForeignKey(x => x.Requester_Id)
+              .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+              .HasMany(x => x.Addressee)
+              .WithRequired(x => x.Addressee)
+              .HasForeignKey(x => x.Addressee_Id)
+              .WillCascadeOnDelete(false);
+
+
+            modelBuilder.Entity<Post>()
+              .HasMany(x => x.CheckIn)
+              .WithOptional(x => x.Post)
+              .HasForeignKey(x => x.Post_Id)
+              .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Post>()
+              .HasMany(x => x.FeelingActivity)
+              .WithOptional(x => x.Post)
+              .HasForeignKey(x => x.Post_Id)
+              .WillCascadeOnDelete(false);
+
+
 
             modelBuilder.Entity<User>()
               .HasMany(x => x.ResetPasswordCode)

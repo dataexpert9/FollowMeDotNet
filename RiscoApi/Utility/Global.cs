@@ -177,7 +177,20 @@ namespace BasketApi
             Duplicate = 4
         }
 
+        public enum AccountVisibility
+        {
+            Public=0,
+            FriendsOnly=1,
+            FriendsAndFollowers=2,
+            OnlyMe=3
+        }
 
+        public enum FriendRequestStatus
+        {
+            Pending=0,
+            Accepted=1,
+            Mutual=2,
+        }
 
         public class ResponseMessages
         {

@@ -495,7 +495,8 @@ namespace BasketApi.Controllers
 						Email = String.IsNullOrEmpty(model.Email) ? null : model.Email,
 						Password = CryptoHelper.Hash(model.Password),
 						SignInType = (int)RoleTypes.User,
-						IsNotificationsOn = true
+						IsNotificationsOn = true,
+						AccountVisibility= Convert.ToInt32(AccountVisibility.Public)
 					};
 
 					ctx.Users.Add(userModel);

@@ -228,12 +228,21 @@ namespace BasketApi.Areas.SubAdmin.Controllers
                     var userId = Convert.ToInt32(User.GetClaimValue("userid"));
 
                     List<Post> posts = new List<Post>();
+                    List<int> FriendAndFollowings = new List<int>();
 
                     // Hide All Post Users
 
                     var HideAllUsersIds = ctx.HideAllPosts.Where(x => x.FirstUserAll_Id == userId && x.IsDeleted == false).Select(x => x.SecondUserAll_Id).ToList();
 
                     var HidePostsIds = ctx.HidePosts.Where(x => x.FirstUser_Id == userId && x.IsDeleted == false).Select(x => x.Post_Id).ToList();
+
+
+                    // jisko mana follow kea hua ha wo followings ma ata han
+                    FriendAndFollowings.AddRange(ctx.FollowFollowers.Where(x => x.FirstUser_Id == userId && !x.IsDeleted).Select(x => x.SecondUser_Id).ToList());
+
+
+                    //FriendAndFollowings.AddRange(ctx.);
+
 
                     posts = ctx.Posts
                        .Include(x => x.User)
@@ -255,14 +264,18 @@ namespace BasketApi.Areas.SubAdmin.Controllers
                         post.IsUserFollow = ctx.FollowFollowers.Any(x => x.FirstUser_Id == userId && x.SecondUser_Id == post.User_Id && x.IsDeleted == false);
 
 
-                        post.Comments = ctx.Comments.Include(x=>x.User).Where(x => x.Post_Id == post.Id && x.ParentComment_Id==0).OrderByDescending(x=>x.Id).Skip(0).Take(5).ToList();
+                        post.Comments = ctx.Comments.Include(x => x.User).Where(x => x.Post_Id == post.Id && x.ParentComment_Id == 0).OrderByDescending(x => x.Id).Skip(0).Take(5).ToList();
 
 
+                        if (post.Comments.Count > 0)
+                        {
+                            foreach (var comment in post.Comments)
+                            {
+                                comment.IsLiked = ctx.Likes.Any(x => x.Comment_Id == comment.Id && x.User_Id == userId && x.IsDeleted == false);
+                                comment.LikesCount = ctx.Comments.Sum(p => p.Likes.Where(x => x.Comment_Id == comment.Id && x.IsDeleted == false).Count());
+                            }
+                        }
                     }
-
-                    
-
-
 
                     CustomResponse<PostListViewModel> response = new CustomResponse<PostListViewModel>
                     {
@@ -312,7 +325,17 @@ namespace BasketApi.Areas.SubAdmin.Controllers
 
                         post.Comments = ctx.Comments
                                                    .Include(x => x.User)
-                                                   .Where(x => x.Post_Id == post.Id  && x.IsDeleted == false).OrderByDescending(x => x.Id).Skip(0).Take(4).ToList();
+                                                   .Where(x => x.Post_Id == post.Id && x.IsDeleted == false && x.ParentComment_Id == 0).OrderByDescending(x => x.Id).Skip(0).Take(4).ToList();
+
+                        if (post.Comments.Count > 0)
+                        {
+                            foreach (var comment in post.Comments)
+                            {
+                                comment.IsLiked = ctx.Likes.Any(x => x.Comment_Id == comment.Id && x.User_Id == User_Id && x.IsDeleted == false);
+                                comment.LikesCount = ctx.Comments.Sum(p => p.Likes.Where(x => x.Comment_Id == comment.Id && x.IsDeleted == false).Count());
+                            }
+                        }
+
                     }
 
 
@@ -338,7 +361,7 @@ namespace BasketApi.Areas.SubAdmin.Controllers
 
         [HttpGet]
         [Route("GetCommentsByPostId")]
-        public async Task<IHttpActionResult> GetCommentsByPostId(int Post_Id,int User_Id, int PageSize = int.MaxValue, int PageNo = 0)
+        public async Task<IHttpActionResult> GetCommentsByPostId(int Post_Id, int User_Id, int PageSize = int.MaxValue, int PageNo = 0)
         {
             try
             {
@@ -410,6 +433,8 @@ namespace BasketApi.Areas.SubAdmin.Controllers
                             .Include(x => x.User)
                             .Where(x => x.ParentComment_Id == comment.Id && x.IsDeleted == false).ToList();
                         comment.IsLiked = ctx.Likes.Any(x => x.Comment_Id == comment.Id && x.User_Id == userId && x.IsDeleted == false);
+                        comment.LikesCount = ctx.Comments.Sum(p => p.Likes.Where(x => x.Comment_Id == comment.Id && x.IsDeleted == false).Count());
+
                         foreach (Comment childComment in comment.ChildComments)
                         {
                             childComment.IsLiked = ctx.Likes.Any(x => x.Comment_Id == childComment.Id && x.User_Id == userId && x.IsDeleted == false);
@@ -444,7 +469,7 @@ namespace BasketApi.Areas.SubAdmin.Controllers
                     var userId = Convert.ToInt32(User.GetClaimValue("userid"));
 
                     var user = ctx.Users.Where(x => x.Email.Contains(name) || x.FullName.Contains(name) || x.UserName.Contains(name)).ToList();
-                   
+
 
                     CustomResponse<List<User>> response = new CustomResponse<List<User>>
                     {
@@ -467,7 +492,7 @@ namespace BasketApi.Areas.SubAdmin.Controllers
         public async Task<IHttpActionResult> LikePost(int Post_Id)
         {
             try
-            { 
+            {
                 var userId = Convert.ToInt32(User.GetClaimValue("userid"));
 
                 using (RiscoContext ctx = new RiscoContext())
@@ -947,7 +972,7 @@ namespace BasketApi.Areas.SubAdmin.Controllers
             {
                 using (RiscoContext ctx = new RiscoContext())
                 {
-                    if(FirstUser_Id != SecondUser_Id)
+                    if (FirstUser_Id != SecondUser_Id)
                     {
                         TopFollowerLog topFollowerLog = new TopFollowerLog
                         {
